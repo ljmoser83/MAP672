@@ -8,15 +8,72 @@
 
     <style>
 		
-	/*	CSS rules written here */
-		
+        body {margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    font-family: sans-serif;
+    color: #3d3d3d;}
+        section {
+    width: 960px;
+    margin: 20px auto;
+}
+
+h1 {
+    width: 960px;
+    margin: 20px auto;
+    font-family: serif;
+    letter-spacing: .04em;
+}
+
+h2 {
+    font-family: serif;
+    letter-spacing: .04em;
+}
+        p {
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+a {
+    color: #005daa;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin: 10px 0
+}
+		#map {
+    width: 960px;
+    height: 540px;
+    margin: 10px auto;
+    border: 2px solid #d3d3d3;
+}
     </style>
 </head>
 
 <body>
 
 	<h1>Awesome Map!</h1>
-    <img src="images/world.png" alt="world map">
+    <div id='map'></div>
+    
+    <section>
+    <h2>about this map</h2>
+    <p>Additional information about <a href="http://newmapsplus.uky.edu/">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.</p>
+<ul>
+    <li>See my projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
+    <li>Follow me on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
+    <li>Visit my <a href='#'>mapping portfolio</a>.</li>
+</ul>
+    </section>
    
 
 
