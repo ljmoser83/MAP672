@@ -79,16 +79,16 @@ li {
 
 <body>
 
-	<h1>Awesome Map!</h1>
+	<h1>Winchester, Kentucky</h1>
     <div id='map'></div>
     
     <section>
-    <h2>about this map</h2>
+    <h2>Winchester, Kentucky</h2>
     <p>Additional information about <a href="http://newmapsplus.uky.edu/">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.</p>
 <ul>
-    <li>See my projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
+   <li>See my projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
     <li>Follow me on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
-    <li>Visit my <a href='#'>mapping portfolio</a>.</li>
+    <li>Visit my <a href='#'>mapping portfolio</a>.
 </ul>
     </section>
    
@@ -96,18 +96,17 @@ li {
 
 	<script>
 
-	document.querySelector('h1').innerHTML = 'web mapping is sweet!';
+	document.querySelector('h1').innerHTML = 'Welcome to My Hometown: Winchester, Kentucky!';
     var map = document.getElementById('map');
     map.style.background = '#4d4a9f';
-    map.addEventListener('click', function() {
-    this.style.width = '400px';   
-});
+      
+
         var newListItem = document.createElement('li');
 newListItem.innerHTML = "list item 4";
 document.querySelector('ul').appendChild(newListItem);
         console.log("hello map");
         var options = {
-    center: [38.0406, -84.5037],
+    center: [37.992211, -84.179384],
     zoom: 12
 }
 
@@ -119,7 +118,7 @@ var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.
     maxZoom: 19
 }).addTo(map);
 
-var message = 'Lexington is awesome!';
+var message = 'Winchester is the home of Ale8<sub>1</sub> and Beer Cheese!';
 
 L.marker(map.getCenter())
     .bindTooltip(message)
