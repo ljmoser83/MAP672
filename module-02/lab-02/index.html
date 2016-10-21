@@ -19,7 +19,7 @@
 		
         body {margin: 0;
     padding: 0;
-    background: #f5f5f5;
+    background: #ffffcc;
     font-family: sans-serif;
     color: #3d3d3d;}
         section {
@@ -30,7 +30,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #f5f5f5;
+    background: #ffffcc;
     font-family: "Noto Sans", sans-serif;
     color: #3d3d3d;
 }
@@ -83,27 +83,31 @@ li {
     <div id='map'></div>
     
     <section>
-    <h2>Winchester, Kentucky</h2>
-    <p>Additional information about <a href="http://newmapsplus.uky.edu/">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.</p>
+    <h2>About this map</h2>
+    <p><a href="http://www.winchesterky.com/">Winchester</a> is the county seat of Clark County, Kentucky. Located in the Inner Bluegrass Region of Kentucky, Winchester is the first major city directly to the east of Lexington, Kentucky. The population of Winchester was 18,383 in 2013. Here are some more fun and interesting facts about Winchester:</p>
 <ul>
-   <li>See my projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
-    <li>Follow me on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
-    <li>Visit my <a href='#'>mapping portfolio</a>.
+   <li>Winchester is the home of <a href="https://en.wikipedia.org/wiki/Beer_cheese_(spread)">beer cheese</a> and the annual <a href="http://www.beercheesefestival.com/">Beer Cheese Festival.</a> </li>
+    <li><a href="http://ale8one.com/">Ale8<sub>1</sub></a> was created in Winchester.</li>
+    <li>Nearby <a href="http://parks.ky.gov/parks/recreationparks/Fort-Boonesborough/">Fort Boonesborough</a> was constructed in 1775 by Daniel Boone.</li>
+    <li>Renowned Bluegrass instrument maker and musician <a href="http://www.backroombluegrassband.com/hlccbweb/hlhome.htm">Homer Ledford</a> made his home in Winchester.</li>
 </ul>
+        <p>The cartographic gaze, as it applies to our mapping practices, dictates many of the elements of map design and the underlying techniques that we utilize in map production. Considerations such as projection, scale, and content are all parts of the design process that lead to the production of interactive content that the user can readily manipulate. At first glance, the map above of Winchester, Kentucky, displays the names of roads and places and a network of simple, interconnected lines on a grey canvas. With the “God’s eye view” that web maps enable the user to possess, we can quickly discover the dynamic nature of the map interface and observe that we can adjust the scale and focal point of the map. By zooming into the map we can see the patterns of human civilization such as neighborhoods, businesses, and other points of interest come into view. Users can start at the focal point that was hard coded into the map and adventure into and around the map until they have exhausted their curiosities. Modern web mapping offers opportunities to the masses to experience cartography and geography in an inclusive, interactive manner that is truly unrivaled throughout human history. It provides the ability for each of us to embrace our inner explorer. </p>
+        
+        <p>This webpage was authored by Lee Moser as a part of The University of Kentucky's MAP672-201: Programming for Web Mapping course in the Fall of 2016. </p>
     </section>
    
 
 
 	<script>
 
-	document.querySelector('h1').innerHTML = 'Welcome to My Hometown: Winchester, Kentucky!';
+	document.querySelector('h1').innerHTML = 'Welcome to My Hometown, Winchester, Kentucky!';
     var map = document.getElementById('map');
     map.style.background = '#4d4a9f';
       
 
-        var newListItem = document.createElement('li');
-newListItem.innerHTML = "list item 4";
-document.querySelector('ul').appendChild(newListItem);
+        //var newListItem = document.createElement('li');
+//newListItem.innerHTML = "List item 4";
+//document.querySelector('ul').appendChild(newListItem);
         console.log("hello map");
         var options = {
     center: [37.992211, -84.179384],
@@ -118,7 +122,7 @@ var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.
     maxZoom: 19
 }).addTo(map);
 
-var message = 'Winchester is the home of Ale8<sub>1</sub> and Beer Cheese!';
+var message = 'Winchester, Kentucky';
 
 L.marker(map.getCenter())
     .bindTooltip(message)
