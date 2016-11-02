@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 03 Starter Template</title>
+    <title>The Major Cities of Central Kentucky</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
@@ -141,7 +141,7 @@
 
         console.log("The total population of these cities is:", totalPop);
 
-        console.log("The average population of these cities is:", (totalPop / 2));
+        console.log("The average population of these cities is:", (totalPop / 3));
 
         var cities = ["Lexington", "Frankfort", "Louisville"];
 
@@ -151,7 +151,7 @@
         // END WRITING CODE FOR LAB 03 HERE
 
         // CITY1 MARKER CODE HERE
-        var city1Popup = "<b>" + city1Name + "</b><br>" + "<b>population</b>: " + city1Pop;
+        var city1Popup = "<b>" + city1Name + "</b><br>" + "<b>population</b>: " + city1Pop.toLocaleString();
 
         if (city1Capital == true) {
             city1Popup += "<br>Capital of the Commonwealth of Kentucky";
@@ -161,7 +161,7 @@
             .bindPopup(city1Popup);
 
         //        UNCOMMENT CITY2 MARKER CODE HERE
-        var city2Popup = "<b>" + city2Name + "</b><br>" + "<b>population</b>: " + city2Pop;
+        var city2Popup = "<b>" + city2Name + "</b><br>" + "<b>population</b>: " + city2Pop.toLocaleString();
 
         if (city2Capital == true) {
             city2Popup += "<br>Capital of the Commonwealth of Kentucky";
@@ -171,7 +171,7 @@
             .bindPopup(city2Popup);
 
         //         CITY3 MARKER CODE HERE
-        var city3Popup = "<b>" + city3Name + "</b><br>" + "<b>population</b>: " + city3Pop;
+        var city3Popup = "<b>" + city3Name + "</b><br>" + "<b>population</b>: " + city3Pop.toLocaleString();
 
         if (city3Capital == true) {
             city3Popup += "<br>Capital of the Commonwealth of Kentucky";
