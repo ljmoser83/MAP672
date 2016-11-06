@@ -6,112 +6,125 @@
     <title>Lab 04 Starter Template</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
 
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			background: whitesmoke;
-			font-family: "Noto Sans", sans-serif;
-			color: #3d3d3d;
-		}
-
-    	section {
-			width: 960px;
-			margin: 20px auto;
-		}
-
-		h1 {
-			width: 960px;
-			margin: 20px auto;
-			font-family: "Lora", serif;
-			letter-spacing: .04em;
-		}
-
-		h2 {
-			font-family: "Lora", serif;
-			letter-spacing: .04em;
-		}
-
-		p {
-			font-size: 1em;
-			line-height: 1.5em;
-		}
-
-		a {
-			color: #005daa;
-      		font-weight: bold;
-			text-decoration: none;
-		}
-
-		a:hover {
-			text-decoration: underline;
-		}
-		#map {
-		  width: 960px;
-		  height: 540px;
-		  margin: 10px auto;
-		  border: 2px solid #d3d3d3;
-		}
-	</style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: "Noto Sans", sans-serif;
+            color: #3d3d3d;
+        }
+        
+        section {
+            width: 960px;
+            margin: 20px auto;
+        }
+        
+        h1 {
+            width: 960px;
+            margin: 20px auto;
+            font-family: "Lora", serif;
+            letter-spacing: .04em;
+        }
+        
+        h2 {
+            font-family: "Lora", serif;
+            letter-spacing: .04em;
+        }
+        
+        p {
+            font-size: 1em;
+            line-height: 1.5em;
+        }
+        
+        a {
+            color: #005daa;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        #map {
+            width: 960px;
+            height: 540px;
+            margin: 10px auto;
+            border: 2px solid #d3d3d3;
+        }
+    </style>
 </head>
 
 <body>
 
-	<h1>map title</h1>
+    <h1>My Travel Goals for 2017</h1>
 
     <div id='map'></div>
 
-	<section>
-		
-		<h2>about this map</h2>
-		
-		<p>Map authored by me, MY NAME</p>
+    <section>
 
-		<p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>
+        <h2>These are the cities in the world that I would most like to travel to in 2017.</h2>
 
-	</section>
-	
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+        
+
+        <p>After the first of the year, I would like to visit <a href="https://www.denvergov.org/content/denvergov/en.html">Denver, Colorado (United States)</a> to enjoy some skiing in the mountains and to visit my favorite cousin. Early summer, I would like to visit <a href="https://en.wikipedia.org/wiki/Manaus">Manaus, Amazonas (Brazil)</a> to see the confluence of the two rivers (Rio Negro and Rio Solimões) that converge to form the Amazon River. Mid winter, I would like to visit <a href="https://www.amazingalbany.com.au/">Albany, West Australia (Australia)</a> to experience remote, wild Australia and to escape the winter blues of the Northern Hemisphere! </p>
+        
+        <p>Map authored by Lee Moser, University of Kentucky's MAP672 Fall 2016</p>
+
+    </section>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script>
-
-		// initial map options
-		var options = {
+        // initial map options
+        var options = {
             center: [0, 0],
             zoom: 2
         }
-		
-		// instantiate Leaflet map object
-        var map = L.map('map', options);
-        
-		// request remote basemap tiles
-		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-});
-		// add tiles to map
-        map.addLayer(tiles);
-            
-		// variable to hold string value of city name
-		var cityName = "Denver";
-		
-		// variable to hold number value of city population
-		var cityPopulation = 649495;
-        
-		// build a string with HTML tags and content
-        var popup = "<b>" + cityName + "</b><br>" +
-                    "<b>population</b>: " + cityPopulation;
 
-        // create a Leaflet marker at the coordinates of Denver, CO
-		// add it to the map
-		// and bind the popup content to the marker.
-        L.marker([39.74, -104.99]).addTo(map)
-			.bindPopup(popup);
-              
+        // instantiate Leaflet map object
+        var map = L.map('map', options);
+
+        // request remote basemap tiles
+        var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+        });
+        // add tiles to map
+        map.addLayer(tiles);
+
+        var cities = ['Denver', 'Manaus', 'Albany']
+        var cityCoords = [[39.74, -104.99], [-3.06, -59.99], [-35.03, 117.88]];
+        var cityPops = [682545, 2094391, 33970];
+        var cityCapitals = [true, true, false];
+        var State = ['Colorado', 'Amazonas', 'West Australia'];
+
+
+        for (var i = 0; i < cities.length; i++) {
+
+            var cityName = cities[i];
+
+            var cityPop = cityPops[i];
+
+            var popup = "<b>" + cities[i] + "</b><br>" +
+                "<b>population</b>: " + "<b>" + cityPops[i] + "</b>";
+            if (cityCapitals[i] == true) {
+                popup += "<br><b>Is the capital of the state of </b>" + '<b>' + State[i] + '</b>'
+            }
+            else {popup += "<br><b>Is not the capital of the state of </b>" + '<b>' + State[i] + '</b>'}
+
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup)
+
+            var nameAndPop = cityName + ' population:' + ' ' + cityPop;
+
+            console.log(nameAndPop);
+        }
     </script>
-    
+
 </body>
