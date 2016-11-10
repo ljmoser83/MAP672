@@ -114,9 +114,9 @@
             var popup = "<b>" + cities[i] + "</b><br>" +
                 "<b>population</b>: " + "<b>" + cityPops[i] + "</b>";
             if (cityCapitals[i] == true) {
-                popup += "<br><b>Is the capital of the state of </b>" + '<b>' + State[i] + '</b>'
+                popup += "<br><b>Is the capitol of the state of </b>" + '<b>' + State[i] + '</b>'
             }
-            else {popup += "<br><b>Is not the capital of the state of </b>" + '<b>' + State[i] + '</b>'}
+            else {popup += "<br><b>Is not the capitol of the state of </b>" + '<b>' + State[i] + '</b>'}
 
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup)
