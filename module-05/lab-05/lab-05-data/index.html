@@ -2,182 +2,145 @@
 <html>
 
 <head>
-	<meta charset=utf-8 />
-	<title>Lab 05 Solution</title>
-	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta charset=utf-8 />
+    <title>Lab 05 Solution</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
 
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			background: whitesmoke;
-			font-family: "Noto Sans", sans-serif;
-			color: #3d3d3d;
-		}
-		
-		section {
-			width: 960px;
-			margin: 20px auto;
-		}
-		
-		h1 {
-			width: 960px;
-			margin: 20px auto;
-			font-family: "Lora", serif;
-			letter-spacing: .04em;
-		}
-		
-		h2 {
-			font-family: "Lora", serif;
-			letter-spacing: .04em;
-		}
-		
-		p {
-			font-size: 1em;
-			line-height: 1.5em;
-		}
-		
-		a {
-			color: #005daa;
-			font-weight: bold;
-			text-decoration: none;
-		}
-		
-		a:hover {
-			text-decoration: underline;
-		}
-		
-		#map {
-			width: 960px;
-			height: 540px;
-			margin: 10px auto;
-			border: 2px solid #d3d3d3;
-		}
-		
-		button {
-			font-size: 1.2em;
-			/*            margin: 10px auto;*/
-		}
-	</style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: "Noto Sans", sans-serif;
+            color: #3d3d3d;
+        }
+        
+        section {
+            width: 960px;
+            margin: 20px auto;
+        }
+        
+        h1 {
+            width: 960px;
+            margin: 20px auto;
+            font-family: "Lora", serif;
+            letter-spacing: .04em;
+        }
+        
+        h2 {
+            font-family: "Lora", serif;
+            letter-spacing: .04em;
+        }
+        
+        p {
+            font-size: 1em;
+            line-height: 1.5em;
+        }
+        
+        a {
+            color: #005daa;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        #map {
+            width: 960px;
+            height: 540px;
+            margin: 10px auto;
+            border: 2px solid #d3d3d3;
+        }
+        
+        button {
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 
 <body>
-	<h1>Towns that I've Called Home in Kentucky</h1>
+    <h1>Towns that I've Called Home in Kentucky</h1>
 
-	<div id='map'></div>
+    <div id='map'></div>
 
+    <section>
 
-	<section>
+        <button id='map-cities'>Map Cities</button>
 
-		<button id='map-cities'>Map Cities</button>
+        <h2>Here is a little information about the places I have lived in Kentucky:</h2>
 
-		<h2>Here is a little information about the places I have lived in Kentucky:</h2>
+        <p><a href="http://www.winchesterky.com/">Winchester</a> is the county seat of Clark County, Kentucky. Located in the Inner Bluegrass Region of Kentucky, Winchester is the first major city directly to the east of Lexington, Kentucky. The population of Winchester was 18,383 in 2013. <a href="https://www.lexingtonky.gov/">Lexington</a> is the county seat of Fayette County, Kentucky. Lexington is the heart of the Bluegrass Region and is the home of the University of Kentucky Wildcats. The population of Lexington was 308,428 in 2013. <a href="http://www.cityoflondonkentucky.org/">London</a> is the county seat of Laurel County, Kentucky. London is the gateway to forests and mountains of southeastern Kentucky and is the home of Laurel Lake. The population of London was 8,092 in 2013. </p>
 
-		
-
-		<p><a href="http://www.winchesterky.com/">Winchester</a> is the county seat of Clark County, Kentucky. Located in the Inner Bluegrass Region of Kentucky, Winchester is the first major city directly to the east of Lexington, Kentucky. The population of Winchester was 18,383 in 2013. <a href="https://www.lexingtonky.gov/">Lexington</a> is the county seat of Fayette County, Kentucky. Lexington is in the heart of the Bluegrass and is the home of the Kentucky Wildcats. The population of Lexington was 308,428 in 2013. <a href="http://www.cityoflondonkentucky.org/">London</a> is the county seat of Laurel County, Kentucky. London is the gateway to forests and mountains of southeastern Kentucky and is the home of Laurel Lake. The population of London was 8,092 in 2013. </p>
-        
         <p>Map authored by Lee Moser, University of Kentucky's MAP672 Fall 2016</p>
 
-	</section>
+    </section>
 
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
-	<script>
-		// map options
-		var options = {
-			center: [37.75, -84.25],
-			zoom: 8
-        
-		}
+    <script>
+        var options = {
+            center: [37.75, -84.25],
+            zoom: 8
 
-		// creates the Leaflet map
-		var map = L.map('map', options);
+        }
 
-		// requests some map tiles
-		var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-			subdomains: 'abcd',
-			maxZoom: 19
-		});
+        var map = L.map('map', options);
 
-		// adds these tiles to the map
-		map.addLayer(tiles);
-        
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
+
+        map.addLayer(tiles);
+
         var cities = ['Winchester', 'London', 'Lexington'];
         var cityCoords = [[38.01, -84.19], [37.13, -84.09], [38.05, -84.51]];
-		var cityPops = [18383 , 8092, 308428];
-		var cityAreas = [ 7.9, 10.31, 87.5];
+        var cityPops = [18383, 8092, 308428];
+        var cityAreas = [7.9, 10.31, 87.5];
 
+        var button = document.getElementById("map-cities");
 
-		//    var cities = // write 3 city names as Strings within an array
-		//    var cityCoords = // write a two-dimensional array of the coordinates for each city
-		//    var cityPops = // write the populations of the 3 cities as Numbers within an array;
-		//    var cityAreas = // write the areas of the 3 cities as Numbers within an array;
+        button.addEventListener("click", function () {
 
-		var button = document.getElementById("map-cities");
+            var units = prompt('Enter the units for calculating density', 'Enter "mile" or "km"');
 
-		button.addEventListener("click", function () {
+            if (units != 'mile' && units != 'km') {
+                location.reload()
+            };
 
-			var units = prompt('Enter the units for calculating density', 'Enter "mile" or "km"');
+            mapCities(units);
 
-			mapCities(units);
+        });
 
-			// call a function named mapCities, and send the units variable as an argument
+        function mapCities(units) {
+            for (var i = 0; i < cities.length; i++) {
+                var density = calcPopDensity(cityPops[i], cityAreas[i], units);
 
-		}); // addEventListener callback function ends here
-function mapCities (units){
-    for(var i=0; i < cities.length; i++){
- var density= calcPopDensity(cityPops[i], cityAreas[i], units);
+                var popup = "<b>" + cities[i] + ", Kentucky" + "</b><br>" +
+                    "<b>Population density</b>: " + "<b>" + Math.round(density) + ' people per square ' + units + "</b>";
+                L.marker(cityCoords[i]).addTo(map)
+                    .bindPopup(popup)
+            }
+        }
 
-        var popup = "<b>" + cities[i] + "</b><br>" +
-                "<b>population density</b>: " + "<b>" +Math.round(density)+ ' people per square ' + units + "</b>";
-        L.marker(cityCoords[i]).addTo(map)
-                .bindPopup(popup)
-    }
-}
+        function calcPopDensity(cityPop, cityArea, units) {
 
-		// write a function here named mapCities so that it accepts units as a parameter
-function calcPopDensity(cityPop, cityArea, units){
-    
-    if (units === 'km') {return 1.60934*(cityPop/cityArea)}
-    else {return (cityPop/cityArea)}
-}
-
-		// write a function named calcPopDensity here so that it accepts a 
-		// single city's population, area, and the value for units 
-		// determined by the user
-    
-// HELP FROM LAB 04
-//    for (var i = 0; i < cities.length; i++) {
-//
-//            var cityName = cities[i];
-//
-//            var cityPop = cityPops[i];
-//
-//            var popup = "<b>" + cities[i] + "</b><br>" +
-//                "<b>population</b>: " + "<b>" + cityPops[i] + "</b>";
-//            if (cityCapitals[i] == true) {
-//                popup += "<br><b>Is the capitol of the state of </b>" + '<b>' + State[i] + '</b>'
-//            }
-//            else {popup += "<br><b>Is not the capitol of the state of </b>" + '<b>' + State[i] + '</b>'}
-//
-//            L.marker(cityCoords[i]).addTo(map)
-//                .bindPopup(popup)
-//
-//            var nameAndPop = cityName + ' population:' + ' ' + cityPop;
-//
-//            console.log(nameAndPop);
-//        }
-		
-		
-	</script>
+            if (units === 'km') {
+                return (cityPop / (1.60934*cityArea))
+            } else {
+                return (cityPop / cityArea)
+            }
+        }
+    </script>
 
 </body>
 
