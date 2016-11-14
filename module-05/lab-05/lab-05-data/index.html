@@ -67,7 +67,7 @@
 </head>
 
 <body>
-	<h1>map title</h1>
+	<h1>Towns that I've Called Home in Kentucky</h1>
 
 	<div id='map'></div>
 
@@ -76,11 +76,13 @@
 
 		<button id='map-cities'>Map Cities</button>
 
-		<h2>about this map</h2>
+		<h2>Here is a little information about the places I have lived in Kentucky:</h2>
 
-		<p>Map authored by me, MY NAME</p>
+		
 
-		<p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>
+		<p><a href="http://www.winchesterky.com/">Winchester</a> is the county seat of Clark County, Kentucky. Located in the Inner Bluegrass Region of Kentucky, Winchester is the first major city directly to the east of Lexington, Kentucky. The population of Winchester was 18,383 in 2013. <a href="https://www.lexingtonky.gov/">Lexington</a> is the county seat of Fayette County, Kentucky. Lexington is in the heart of the Bluegrass and is the home of the Kentucky Wildcats. The population of Lexington was 308,428 in 2013. <a href="http://www.cityoflondonkentucky.org/">London</a> is the county seat of Laurel County, Kentucky. London is the gateway to forests and mountains of southeastern Kentucky and is the home of Laurel Lake. The population of London was 8,092 in 2013. </p>
+        
+        <p>Map authored by Lee Moser, University of Kentucky's MAP672 Fall 2016</p>
 
 	</section>
 
@@ -90,8 +92,9 @@
 	<script>
 		// map options
 		var options = {
-			center: [20, -20],
-			zoom: 2
+			center: [37.75, -84.25],
+			zoom: 8
+        
 		}
 
 		// creates the Leaflet map
@@ -107,10 +110,10 @@
 		// adds these tiles to the map
 		map.addLayer(tiles);
         
-        var cities = ['Winchester', 'Snellville', 'Lexington']
-        var cityCoords = [[38.01, -84.19], [33.86, -84.02], [38.05, -84.51]]
-		var cityPops = [18383 , 19245, 308428];
-		var cityAreas = [ 7.9, 9.69, 87.5];
+        var cities = ['Winchester', 'London', 'Lexington'];
+        var cityCoords = [[38.01, -84.19], [37.13, -84.09], [38.05, -84.51]];
+		var cityPops = [18383 , 8092, 308428];
+		var cityAreas = [ 7.9, 10.31, 87.5];
 
 
 		//    var cities = // write 3 city names as Strings within an array
@@ -122,21 +125,56 @@
 
 		button.addEventListener("click", function () {
 
-			var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
+			var units = prompt('Enter the units for calculating density', 'Enter "mile" or "km"');
 
-			console.log(units);
+			mapCities(units);
 
 			// call a function named mapCities, and send the units variable as an argument
 
 		}); // addEventListener callback function ends here
+function mapCities (units){
+    for(var i=0; i < cities.length; i++){
+ var density= calcPopDensity(cityPops[i], cityAreas[i], units);
 
+        var popup = "<b>" + cities[i] + "</b><br>" +
+                "<b>population density</b>: " + "<b>" +Math.round(density)+ ' people per square ' + units + "</b>";
+        L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup)
+    }
+}
 
 		// write a function here named mapCities so that it accepts units as a parameter
-
+function calcPopDensity(cityPop, cityArea, units){
+    
+    if (units === 'km') {return 1.60934*(cityPop/cityArea)}
+    else {return (cityPop/cityArea)}
+}
 
 		// write a function named calcPopDensity here so that it accepts a 
 		// single city's population, area, and the value for units 
 		// determined by the user
+    
+// HELP FROM LAB 04
+//    for (var i = 0; i < cities.length; i++) {
+//
+//            var cityName = cities[i];
+//
+//            var cityPop = cityPops[i];
+//
+//            var popup = "<b>" + cities[i] + "</b><br>" +
+//                "<b>population</b>: " + "<b>" + cityPops[i] + "</b>";
+//            if (cityCapitals[i] == true) {
+//                popup += "<br><b>Is the capitol of the state of </b>" + '<b>' + State[i] + '</b>'
+//            }
+//            else {popup += "<br><b>Is not the capitol of the state of </b>" + '<b>' + State[i] + '</b>'}
+//
+//            L.marker(cityCoords[i]).addTo(map)
+//                .bindPopup(popup)
+//
+//            var nameAndPop = cityName + ' population:' + ' ' + cityPop;
+//
+//            console.log(nameAndPop);
+//        }
 		
 		
 	</script>
