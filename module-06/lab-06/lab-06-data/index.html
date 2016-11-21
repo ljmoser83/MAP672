@@ -19,60 +19,73 @@
             font-family: "Noto Sans", sans-serif;
             color: #3d3d3d;
         }
-
+        
         section {
             width: 960px;
             margin: 20px auto;
         }
-
+        
         h1 {
-            width: 960px;
+            width: 1040px;
             margin: 20px auto;
             font-family: "Lora", serif;
             letter-spacing: .04em;
         }
-
+        
         h2 {
             font-family: "Lora", serif;
             letter-spacing: .04em;
         }
-
+        
         p {
             font-size: 1em;
             line-height: 1.5em;
         }
-
+        
         a {
             color: #005daa;
             font-weight: bold;
             text-decoration: none;
         }
-
+        
         a:hover {
             text-decoration: underline;
         }
-
+        
         #map {
             width: 960px;
             height: 540px;
             margin: 10px auto;
             border: 2px solid #d3d3d3;
         }
+        
+        .kentucky-blue {
+            color: blue;
+        }
+        
+        .cincinnati-red {
+            color: #f90b2f;
+        }
+        
+        .tennessee-orange {
+            color: darkorange;
+        }
     </style>
 </head>
 
 <body>
-    <h1>map title</h1>
+    <h1>Notable Men's and Women's College Basketball Programs on I-75</h1>
 
     <div id='map'></div>
 
 
     <section>
 
-        <p>Map authored by me, MY NAME</p>
+<h2>Time for a road trip!</h2>
+        
+        <p> Within a three and a half hour drive you can visit three cities on I-75 that are major college basketball towns. Cincinnati, Ohio is home to the <a href="http://www.uc.edu/athletics.html">Cincinnati Bearcats</a> and the <a href="http://www.goxavier.com/">Xavier Musketeers</a>. Across the Ohio River, and just a short trip south, is Lexington, Kentucky, home of the legendary <a href="http://www.ukathletics.com/">Kentucky Wildcats</a>. Continuing south into the Appalachian Mountains takes you to Knoxville, Tennessee, which is home to the <a href="http://www.utsports.com/l">Tennessee Volunteers</a>. All of these schools have excellent men's and women's basketball programs.</p>
 
-        <p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus
-            luctus. </p>
+        <p>Map authored by Lee Moser, University of Kentucky's MAP672 Fall 2016</p>
 
     </section>
 
@@ -81,8 +94,8 @@
 
     <script>
         var map = L.map('map', {
-            center: [38.96, -85.36],
-            zoom: 8,
+            center: [38.05, -84.46],
+            zoom: 7,
         });
 
         var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
@@ -94,13 +107,47 @@
         // Begin writing/modifying code for Lab 06 here
 
         var cities = [{
-            name: "Louisville",
-            properties: {
-                coordinates: [38.25, -85.7667],
-                population: 756832,
-                state: "KY"
+                name: "Knoxville",
+                properties: {
+                    coordinates: [35.98, -83.93],
+                    population: 183270,
+                    state: "TN"
+                }
+        },
+            {
+                name: "Cincinnati",
+                properties: {
+                    coordinates: [39.13, -84.53],
+                    population: 297517,
+                    state: "OH"
+                }
+           },
+            {
+                name: "Lexington",
+                properties: {
+                    coordinates: [38.05, -84.46],
+                    population: 308428,
+                    state: "KY"
+                }
+           }
+    ];
+        for (var i = 0; i < cities.length; i++) {
+            var props = cities[i].properties;
+            var popup = buildPopup(cities[i].name, props.population, props.state);
+            L.marker(props.coordinates).addTo(map)
+                .bindPopup(popup);
+        };
+        function buildPopup(city, pop, state) {
+            if (state == 'KY') {
+                var colorClass = 'kentucky-blue';
+            } else if (state == 'OH') {
+                var colorClass = 'cincinnati-red';
+            } else if (state == 'TN') {
+                var colorClass = 'tennessee-orange';
             }
-        }];
+            return ("<div class='" + colorClass + "'><b>" + city + "</b><br>" +
+                "<b>Population</b>: " + pop.toLocaleString() + "<div>");
+        };
     </script>
 
 </body>
