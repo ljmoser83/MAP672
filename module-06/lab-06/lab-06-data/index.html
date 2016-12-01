@@ -19,54 +19,54 @@
             font-family: "Noto Sans", sans-serif;
             color: #3d3d3d;
         }
-        
+
         section {
             width: 960px;
             margin: 20px auto;
         }
-        
+
         h1 {
             width: 1040px;
             margin: 20px auto;
             font-family: "Lora", serif;
             letter-spacing: .04em;
         }
-        
+
         h2 {
             font-family: "Lora", serif;
             letter-spacing: .04em;
         }
-        
+
         p {
             font-size: 1em;
             line-height: 1.5em;
         }
-        
+
         a {
             color: #005daa;
             font-weight: bold;
             text-decoration: none;
         }
-        
+
         a:hover {
             text-decoration: underline;
         }
-        
+
         #map {
             width: 960px;
             height: 540px;
             margin: 10px auto;
             border: 2px solid #d3d3d3;
         }
-        
+
         .kentucky-blue {
             color: blue;
         }
-        
+
         .cincinnati-red {
             color: #f90b2f;
         }
-        
+
         .tennessee-orange {
             color: darkorange;
         }
@@ -81,9 +81,11 @@
 
     <section>
 
-<h2>Time for a road trip!</h2>
-        
-        <p> Within a three and a half hour drive you can visit three cities on I-75 that are major college basketball towns. Cincinnati, Ohio is home to the <a href="http://www.uc.edu/athletics.html">Cincinnati Bearcats</a> and the <a href="http://www.goxavier.com/">Xavier Musketeers</a>. Across the Ohio River, and just a short trip south, is Lexington, Kentucky, home of the legendary <a href="http://www.ukathletics.com/">Kentucky Wildcats</a>. Continuing south into the Appalachian Mountains takes you to Knoxville, Tennessee, which is home to the <a href="http://www.utsports.com/l">Tennessee Volunteers</a>. All of these schools have excellent men's and women's basketball programs.</p>
+        <h2>Time for a road trip!</h2>
+
+        <p> Within a three and a half hour drive you can visit three cities on I-75 that are major college basketball towns. Cincinnati, Ohio is home to the <a href="http://www.uc.edu/athletics.html">Cincinnati Bearcats</a> and the <a href="http://www.goxavier.com/">Xavier Musketeers</a>.
+            Across the Ohio River, and just a short trip south, is Lexington, Kentucky, home of the legendary <a href="http://www.ukathletics.com/">Kentucky Wildcats</a>. Continuing south into the Appalachian Mountains takes you to Knoxville, Tennessee,
+            which is home to the <a href="http://www.utsports.com/l">Tennessee Volunteers</a>. All of these schools have excellent men's and women's basketball programs.</p>
 
         <p>Map authored by Lee Moser, University of Kentucky's MAP672 Fall 2016</p>
 
@@ -107,36 +109,34 @@
         // Begin writing/modifying code for Lab 06 here
 
         var cities = [{
-                name: "Knoxville",
-                properties: {
-                    coordinates: [35.98, -83.93],
-                    population: 183270,
-                    state: "TN"
-                }
-        },
-            {
-                name: "Cincinnati",
-                properties: {
-                    coordinates: [39.13, -84.53],
-                    population: 297517,
-                    state: "OH"
-                }
-           },
-            {
-                name: "Lexington",
-                properties: {
-                    coordinates: [38.05, -84.46],
-                    population: 308428,
-                    state: "KY"
-                }
-           }
-    ];
+            name: "Knoxville",
+            properties: {
+                coordinates: [35.98, -83.93],
+                population: 183270,
+                state: "TN"
+            }
+        }, {
+            name: "Cincinnati",
+            properties: {
+                coordinates: [39.13, -84.53],
+                population: 297517,
+                state: "OH"
+            }
+        }, {
+            name: "Lexington",
+            properties: {
+                coordinates: [38.05, -84.46],
+                population: 308428,
+                state: "KY"
+            }
+        }];
         for (var i = 0; i < cities.length; i++) {
             var props = cities[i].properties;
             var popup = buildPopup(cities[i].name, props.population, props.state);
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
         };
+
         function buildPopup(city, pop, state) {
             if (state == 'KY') {
                 var colorClass = 'kentucky-blue';
