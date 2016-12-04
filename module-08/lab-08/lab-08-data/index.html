@@ -67,12 +67,14 @@
     </footer>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="power-plants.js"></script>
+    <!--loads the geoJson file power-plants.js and makes it's data and associated variable definition of plants available in this file-->
+
     <script>
         var map = L.map('map', {
             center: [36, -94],
             zoom: 4,
         });
-
+//initiates map and defines initial center and zoom
         var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
             subdomains: 'abcd',
@@ -80,14 +82,17 @@
         });
 
         tiles.addTo(map);
+        //adds desired map tile
         plants.features.sort(function (a, b) {
             return b.properties.capacity_mw - a.properties.capacity_mw;
         });
+        //sorts the features in the feature collection from largest to smallest so that the smaller features display on top of the larger features
 
         function getRadius(area) {
             var radius = Math.sqrt(area / Math.PI);
             return radius * .6;
         }
+        //defines the get radius function to be used for proportional symbology
         L.geoJson(plants, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
@@ -97,27 +102,33 @@
                     fillOpacity: 0.8,
                     radius: getRadius(feature.properties.capacity_mw)
                 });
+                //defines symbology for each feature by defining static values for color, weight, fillColor, and fillOpacity while utilizing the getRadius function with an argument of feature.properties.capacity_mw
             },
             filter: function (feature, layer) {
                 if (feature.properties.fuel_source.Solar &&
                     feature.properties.capacity_mw > 100) {
                     return feature;
                 }
+                //filters the data in the power-plants.js to only show features with a fuel_source of solar that produce greater than 100 MW of power
             },
             onEachFeature: function (feature, layer) {
                 layer.bindPopup("<b>" + "Plant Name: " + feature.properties.plant_name + "</b><br>" + "<b>Capacity (MW): " + feature.properties.capacity_mw+"</b>");
+                //creates a popup upon clicking on the symbol
                 layer.on('mouseover', function () {
                     layer.setStyle({
                         fillColor: '#ff9900'
                     });
+                    //changes the symbol color to orange upon mousover
                 });
                 layer.on('mouseout', function () {
                     layer.setStyle({
                         fillColor: '#ffff66'
                     });
+                    //changes the symbol color to yellow upon mousout
                 });
             }
         }).addTo(map);
+        //adds everything in the L.geoJson method to the map
     </script>
 
 </body>
