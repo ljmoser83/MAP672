@@ -17,27 +17,33 @@
             font-family: Lato, sans-serif;
             color: #0D0000;
         }
+        
         header {
             padding: 6px 10%;
         }
+        
         h1 {
             display: inline-block;
             margin-right: 20px;
             color: #001323;
         }
+        
         h2 {
             display: inline-block;
             color: #001323;
         }
+        
         #map {
             width: 80%;
             height: 540px;
             margin: 10px auto;
         }
+        
         footer {
             padding: 6px 10%;
             width: 80%;
         }
+        
         p {
             font-size: 1em;
             color: #001323;
@@ -60,122 +66,120 @@
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script>
-
-      // build your Leaflet map here!
-        var places= {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Tallinn",
-        "size": 159
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
+        // build your Leaflet map here!
+        var places = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "marker-color": "#7e7e7e",
+                        "marker-size": "medium",
+                        "marker-symbol": "",
+                        "name": "Tallinn",
+                        "size": 159
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
           24.7467041015625,
           59.43110957970815
         ]
-      }
+                    }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Haapsalu",
-        "size": 11
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "marker-color": "#7e7e7e",
+                        "marker-size": "medium",
+                        "marker-symbol": "",
+                        "name": "Haapsalu",
+                        "size": 11
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
           23.5162353515625,
           58.952841412884325
         ]
-      }
+                    }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Pärnu",
-        "size": 32
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "marker-color": "#7e7e7e",
+                        "marker-size": "medium",
+                        "marker-symbol": "",
+                        "name": "Pärnu",
+                        "size": 32
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
           24.510498046875,
           58.3844382319306
         ]
-      }
+                    }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Tartu",
-        "size": 39
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "marker-color": "#7e7e7e",
+                        "marker-size": "medium",
+                        "marker-symbol": "",
+                        "name": "Tartu",
+                        "size": 39
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
           26.71875,
           58.37867853932655
         ]
-      }
+                    }
     }
   ]
-}
+        }
         var map = L.map('map', {
-   center: [58.73, 25.67], // centered in Estonia
-   zoom: 7
-});
+            center: [58.73, 25.67], // centered in Estonia
+            zoom: 7
+        });
 
-var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-    subdomains: 'abcd',
-    maxZoom: 19
-});  
-tiles.addTo(map);
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
+        tiles.addTo(map);
         console.log(places)
-        
-        
-//        var placesLeaflet = L.geoJson(places).addTo(map);
-//        
-//        console.log(placesLeaflet)
-//        var placesLeaflet = L.geoJson(places, {
-//    pointToLayer : function(feature, latlng) {
-//        console.log();
-//        return L.circle(latlng, 20000);
-//    }
-//}).addTo(map);
-//        var placesLeaflet =  L.geoJson(places, {
-//    pointToLayer : function(f, ll) {
-//        console.log(f,ll);
-//        return L.circle(ll, 20000);
-//    }
-//}).addTo(map);
-//        var placesLeaflet = L.geoJson(places, {
-//    pointToLayer : function(feature, latlng) {
-//        console.log(feature);
-//        return L.circle(latlng, 20000);
-//    }
-//}).addTo(map);
-       var placesLeaflet = L.geoJson(places, {
-    pointToLayer : function(feature, latlng) {
-        return L.circle(latlng, feature.properties.size * 100);
-    }
-}).addTo(map); 
 
+
+        //        var placesLeaflet = L.geoJson(places).addTo(map);
+        //        
+        //        console.log(placesLeaflet)
+        //        var placesLeaflet = L.geoJson(places, {
+        //    pointToLayer : function(feature, latlng) {
+        //        console.log();
+        //        return L.circle(latlng, 20000);
+        //    }
+        //}).addTo(map);
+        //        var placesLeaflet =  L.geoJson(places, {
+        //    pointToLayer : function(f, ll) {
+        //        console.log(f,ll);
+        //        return L.circle(ll, 20000);
+        //    }
+        //}).addTo(map);
+        //        var placesLeaflet = L.geoJson(places, {
+        //    pointToLayer : function(feature, latlng) {
+        //        console.log(feature);
+        //        return L.circle(latlng, 20000);
+        //    }
+        //}).addTo(map);
+        var placesLeaflet = L.geoJson(places, {
+            pointToLayer: function (feature, latlng) {
+                return L.circle(latlng, feature.properties.size * 100);
+            }
+        }).addTo(map);
     </script>
 
 </body>

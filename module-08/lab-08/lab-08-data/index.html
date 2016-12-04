@@ -17,27 +17,33 @@
             font-family: Lato, sans-serif;
             color: #0D0000;
         }
+        
         header {
             padding: 6px 10%;
         }
+        
         h1 {
             display: inline-block;
             margin-right: 20px;
             color: #001323;
         }
+        
         h2 {
             display: inline-block;
             color: #001323;
         }
+        
         #map {
             width: 80%;
             height: 540px;
             margin: 10px auto;
         }
+        
         footer {
             padding: 6px 10%;
             width: 80%;
         }
+        
         p {
             font-size: 1em;
             color: #001323;
@@ -47,46 +53,71 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Utility Scale Solar Power Plants in the United States</h1>
+
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+
+        <h2>Solar's Bright Future:</h2>
+        <p>Utility scale solar power plants (arrays generating greater than 100 MW) have become an increasingly popular option for energy in the United States. Within the past decade, solar has become economically competitive with many of the traditional fossil fuel based power plant options. With the increasing cost of fossil fuel usage, the increased concern over global climate change, and the decreasing cost of solar equipment, more utility scale solar power projects are expected come online around the country over the next decade.</p>
+        <p>Map authored by Lee Moser, University of Kentucky's MAP672 Fall 2016</p>
     </footer>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="power-plants.js"></script>
     <script>
+        var map = L.map('map', {
+            center: [36, -94],
+            zoom: 4,
+        });
 
-      var map = L.map('map', {
-          center: [36,-94],
-          zoom: 4,
-      });
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
 
-      var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
-      });
+        tiles.addTo(map);
+        plants.features.sort(function (a, b) {
+            return b.properties.capacity_mw - a.properties.capacity_mw;
+        });
 
-      tiles.addTo(map);
-
-      L.geoJson(plants, {
-          pointToLayer: function(feature,latlng) {
-              return L.circleMarker(latlng, {
-                 color: 'orange',
-                 weight: 1,
-                 fillColor: 'yellow',
-                 fillOpacity: 1,
-                 radius: 2
-              });
-          }
-      }).addTo(map);
-
-
+        function getRadius(area) {
+            var radius = Math.sqrt(area / Math.PI);
+            return radius * .6;
+        }
+        L.geoJson(plants, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                    color: '#cc0000',
+                    weight: 1,
+                    fillColor: '#ffff66',
+                    fillOpacity: 0.8,
+                    radius: getRadius(feature.properties.capacity_mw)
+                });
+            },
+            filter: function (feature, layer) {
+                if (feature.properties.fuel_source.Solar &&
+                    feature.properties.capacity_mw > 100) {
+                    return feature;
+                }
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup("<b>" + "Plant Name: " + feature.properties.plant_name + "</b><br>" + "<b>Capacity (MW): " + feature.properties.capacity_mw+"</b>");
+                layer.on('mouseover', function () {
+                    layer.setStyle({
+                        fillColor: '#ff9900'
+                    });
+                });
+                layer.on('mouseout', function () {
+                    layer.setStyle({
+                        fillColor: '#ffff66'
+                    });
+                });
+            }
+        }).addTo(map);
     </script>
 
 </body>

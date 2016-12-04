@@ -92,21 +92,21 @@
                     radius: 2
                 });
             },
-        filter: function(feature, layer) {
-//    if(feature.properties.fuel_source['Natural Gas']){
-//        return feature;  
-//                if(feature.properties.capacity_mw > 500){
-//        return feature;   
-//            if(feature.properties.capacity_mw < 500 &&
-//        feature.properties.fuel_source.Coal){
-            if(feature.properties.fuel_source.Solar &&
-        feature.properties.capacity_mw >1600)  {
-                return feature;
-            } 
-             
-    } 
-            
-            
+            filter: function (feature, layer) {
+                //    if(feature.properties.fuel_source['Natural Gas']){
+                //        return feature;  
+                //                if(feature.properties.capacity_mw > 500){
+                //        return feature;   
+                //            if(feature.properties.capacity_mw < 500 &&
+                //        feature.properties.fuel_source.Coal){
+                if (feature.properties.fuel_source.Solar &&
+                    feature.properties.capacity_mw > 1600) {
+                    return feature;
+                }
+
+            }
+
+
         }).addTo(map);
     </script>
 
