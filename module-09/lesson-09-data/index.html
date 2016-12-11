@@ -388,9 +388,33 @@ for(var layer in layerInfo) {
                 radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])
             }
         }
-    }).addTo(map);        
+    }).addTo(map);
+   
     }
+        console.log(geoJsonLayers)
+for (var layer in geoJsonLayers) {
+    map.on('click', function(e) {
+    geoJsonLayers[layer].eachLayer(function(layer) {
+        var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
 
+        if(distance > 500) {
+            layer.setStyle({
+                stroke: false,
+                fill: false
+            });  
+        } else {
+            layer.setStyle({
+                stroke: true,
+                fill: true  
+            });  
+            layer.bindPopup("I am <b>"+distance.toLocaleString()+
+                            "km</b><br> from the click point.");
+        }
+    });
+});
+    
+}
+    
 function getRadius(val) {
     var radius = Math.sqrt(val/Math.PI);
     return radius * .8;   
