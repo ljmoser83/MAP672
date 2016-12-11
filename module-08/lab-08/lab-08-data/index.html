@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 08 Starter</title>
+    <title>Solar Power</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
@@ -17,33 +17,33 @@
             font-family: Lato, sans-serif;
             color: #0D0000;
         }
-        
+
         header {
             padding: 6px 10%;
         }
-        
+
         h1 {
             display: inline-block;
             margin-right: 20px;
             color: #001323;
         }
-        
+
         h2 {
             display: inline-block;
             color: #001323;
         }
-        
+
         #map {
             width: 80%;
             height: 540px;
             margin: 10px auto;
         }
-        
+
         footer {
             padding: 6px 10%;
             width: 80%;
         }
-        
+
         p {
             font-size: 1em;
             color: #001323;
@@ -100,7 +100,7 @@
                     weight: 1,
                     fillColor: '#ffff66',
                     fillOpacity: 0.8,
-                    radius: getRadius(feature.properties.capacity_mw)
+                    radius: getRadius(feature.properties.fuel_source.Solar)
                 });
                 //defines symbology for each feature by defining static values for color, weight, fillColor, and fillOpacity while utilizing the getRadius function with an argument of feature.properties.capacity_mw
             },
@@ -112,7 +112,8 @@
                 //filters the data in the power-plants.js to only show features with a fuel_source of solar that produce greater than 100 MW of power
             },
             onEachFeature: function (feature, layer) {
-                layer.bindPopup("<b>" + "Plant Name: " + feature.properties.plant_name + "</b><br>" + "<b>Capacity (MW): " + feature.properties.capacity_mw+"</b>");
+                layer.bindPopup("<b>" + "Plant Name: " + feature.properties.plant_name + "</b><br>" +
+                  "<b>Solar capacity (MW): " + feature.properties.fuel_source.Solar+"</b>");
                 //creates a popup upon clicking on the symbol
                 layer.on('mouseover', function () {
                     layer.setStyle({
